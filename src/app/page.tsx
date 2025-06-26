@@ -79,6 +79,35 @@ export default function Home() {
     setIsGenerating(false);
   };
 
+  const downloadAsGoogleDoc = (content: string, filename: string) => {
+    // Googleドキュメント形式でダウンロードするためのHTML生成
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${filename}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; }
+        pre { white-space: pre-wrap; font-family: inherit; }
+    </style>
+</head>
+<body>
+    <pre>${content}</pre>
+</body>
+</html>`;
+
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${filename}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm py-4">
@@ -256,8 +285,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-indigo-700">
                       【メール①】LP情報
                     </h3>
-                    <div className="text-indigo-700">
-                      {collapsedSections.email1 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email1, `${formData.productName}_メール01_LP情報`);
+                        }}
+                        className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-md text-xs hover:bg-indigo-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-indigo-700">
+                        {collapsedSections.email1 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email1 && (
@@ -279,8 +319,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-blue-700">
                       【メール②】資料案内 & 事前質問フォーム
                     </h3>
-                    <div className="text-blue-700">
-                      {collapsedSections.email2 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email2, `${formData.productName}_メール02_資料案内`);
+                        }}
+                        className="px-3 py-1 bg-blue-100 text-blue-700 rounded-md text-xs hover:bg-blue-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-blue-700">
+                        {collapsedSections.email2 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email2 && (
@@ -302,8 +353,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-green-700">
                       【メール③】質問への回答
                     </h3>
-                    <div className="text-green-700">
-                      {collapsedSections.email3 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email3, `${formData.productName}_メール03_質問回答`);
+                        }}
+                        className="px-3 py-1 bg-green-100 text-green-700 rounded-md text-xs hover:bg-green-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-green-700">
+                        {collapsedSections.email3 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email3 && (
@@ -325,8 +387,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-yellow-700">
                       【メール④】募集当日の朝メール
                     </h3>
-                    <div className="text-yellow-700">
-                      {collapsedSections.email4 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email4, `${formData.productName}_メール04_朝メール`);
+                        }}
+                        className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-md text-xs hover:bg-yellow-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-yellow-700">
+                        {collapsedSections.email4 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email4 && (
@@ -348,8 +421,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-red-700">
                       【メール⑤】募集開始 & 面談希望日提出
                     </h3>
-                    <div className="text-red-700">
-                      {collapsedSections.email5 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email5, `${formData.productName}_メール05_募集開始`);
+                        }}
+                        className="px-3 py-1 bg-red-100 text-red-700 rounded-md text-xs hover:bg-red-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-red-700">
+                        {collapsedSections.email5 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email5 && (
@@ -371,8 +455,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-orange-700">
                       【メール⑥】面談実施
                     </h3>
-                    <div className="text-orange-700">
-                      {collapsedSections.email6 ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.email6, `${formData.productName}_メール06_面談実施`);
+                        }}
+                        className="px-3 py-1 bg-orange-100 text-orange-700 rounded-md text-xs hover:bg-orange-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-orange-700">
+                        {collapsedSections.email6 ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.email6 && (
@@ -394,8 +489,19 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-purple-700">
                       【スクリプト】面談用トークスクリプト
                     </h3>
-                    <div className="text-purple-700">
-                      {collapsedSections.script ? '▼' : '▲'}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadAsGoogleDoc(generatedContent.script, `${formData.productName}_面談スクリプト`);
+                        }}
+                        className="px-3 py-1 bg-purple-100 text-purple-700 rounded-md text-xs hover:bg-purple-200 flex items-center gap-1"
+                      >
+                        📄 ダウンロード
+                      </button>
+                      <div className="text-purple-700">
+                        {collapsedSections.script ? '▼' : '▲'}
+                      </div>
                     </div>
                   </div>
                   {!collapsedSections.script && (
