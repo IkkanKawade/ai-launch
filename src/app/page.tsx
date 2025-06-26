@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import LoginPage from "@/components/LoginPage";
 import JSZip from "jszip";
@@ -274,13 +275,26 @@ https://ai-launch.vercel.app
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm py-4">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              AIローンチくん
-            </h1>
-            <p className="text-gray-600 mt-1">
-              商品情報を入力すると、メールシーケンスと面談スクリプトを自動生成します
-            </p>
+          <div className="flex items-center gap-8">
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
+                AIローンチくん
+              </h1>
+              <p className="text-gray-600 mt-1">
+                商品情報を入力すると、メールシーケンスと面談スクリプトを自動生成します
+              </p>
+            </div>
+            <nav className="hidden md:flex space-x-4">
+              <span className="text-blue-600 px-3 py-2 rounded-md text-sm font-medium bg-blue-50">
+                生成ツール
+              </span>
+              <Link 
+                href="/library" 
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-50"
+              >
+                📚 ローンチライブラリー
+              </Link>
+            </nav>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">
