@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import LoginPage from "@/components/LoginPage";
 import JSZip from "jszip";
@@ -48,6 +47,8 @@ export default function Home() {
     script: false,
   });
   const [showStrategyDropdown, setShowStrategyDropdown] = useState(false);
+  const [showLibrary, setShowLibrary] = useState(false);
+  const [activeLibraryTab, setActiveLibraryTab] = useState('course');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -288,12 +289,12 @@ https://ai-launch.vercel.app
               <span className="text-blue-600 px-3 py-2 rounded-md text-sm font-medium bg-blue-50">
                 生成ツール
               </span>
-              <Link 
-                href="/library" 
+              <button
+                onClick={() => setShowLibrary(true)}
                 className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-50"
               >
                 📚 ローンチライブラリー
-              </Link>
+              </button>
             </nav>
           </div>
           <div className="flex items-center gap-4">
@@ -803,6 +804,83 @@ https://ai-launch.vercel.app
           </div>
         </div>
       </div>
+
+      {/* ローンチライブラリーモーダル */}
+      {showLibrary && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
+            {/* モーダルヘッダー */}
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-2xl font-bold">📚 ローンチライブラリー</h2>
+                  <p className="mt-1 opacity-90">PLF式ローンチの学習リソースと成功事例集</p>
+                </div>
+                <button
+                  onClick={() => setShowLibrary(false)}
+                  className="text-white hover:text-gray-200 text-2xl font-bold"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+
+            {/* タブナビゲーション */}
+            <div className="border-b border-gray-200 bg-gray-50">
+              <nav className="flex px-6">
+                <button
+                  onClick={() => setActiveLibraryTab('course')}
+                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                    activeLibraryTab === 'course' 
+                      ? 'border-blue-500 text-blue-600' 
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  📖 PLF学習コース
+                </button>
+                <button
+                  onClick={() => setActiveLibraryTab('cases')}
+                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                    activeLibraryTab === 'cases' 
+                      ? 'border-blue-500 text-blue-600' 
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  🏆 成功事例集
+                </button>
+                <button
+                  onClick={() => setActiveLibraryTab('practices')}
+                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                    activeLibraryTab === 'practices' 
+                      ? 'border-blue-500 text-blue-600' 
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  ⭐ ベストプラクティス
+                </button>
+                <button
+                  onClick={() => setActiveLibraryTab('tutorials')}
+                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                    activeLibraryTab === 'tutorials' 
+                      ? 'border-blue-500 text-blue-600' 
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  🎥 動画チュートリアル
+                </button>
+              </nav>
+            </div>
+
+            {/* コンテンツエリア */}
+            <div className="p-6 overflow-y-auto max-h-[60vh]">
+              {activeLibraryTab === 'course' && <PLFCourseContent />}
+              {activeLibraryTab === 'cases' && <SuccessCasesContent />}
+              {activeLibraryTab === 'practices' && <BestPracticesContent />}
+              {activeLibraryTab === 'tutorials' && <TutorialsContent />}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1369,4 +1447,350 @@ function generateScript(formData: FormData): string {
 よろしくお願いいたします。
 
 送信者情報：${formData.productName}代表`;
+}
+
+// ライブラリーコンポーネント関数群
+function PLFCourseContent() {
+  const [expandedLesson, setExpandedLesson] = useState<string | null>(null);
+
+  const lessons = [
+    {
+      id: 'foundation',
+      title: 'PLFの基礎理論',
+      duration: '30分',
+      level: '初級',
+      description: 'Product Launch Formulaの基本概念と歴史を学びます',
+      content: `
+【学習目標】
+・PLFとは何かを理解する
+・従来の販売手法との違いを知る
+・PLFがなぜ効果的なのかを学ぶ
+
+【レッスン内容】
+1. PLFの誕生背景
+   - ジェフ・ウォーカーのストーリー
+   - インターネットマーケティングの進化
+   - 従来手法の限界
+
+2. PLFの核心理念
+   - 価値先行の原則
+   - 関係性構築の重要性
+   - コミュニティの力
+
+3. 成功の3要素
+   - コンテンツ（価値提供）
+   - コミュニティ（関係性）
+   - 商品/サービス（解決策）
+
+【実践ワーク】
+・あなたの商品/サービスでPLFが適用できる理由を考える
+・現在の販売方法との違いを分析する
+      `
+    },
+    {
+      id: 'structure',
+      title: 'PLFの3段階構造',
+      duration: '45分',
+      level: '初級',
+      description: 'Pre-Launch、Launch、Post-Launchの詳細を理解します',
+      content: `
+【学習目標】
+・PLFの3段階構造を理解する
+・各段階の目的と役割を把握する
+・タイムラインの設計方法を学ぶ
+
+【レッスン内容】
+1. Pre-Launch段階（プレローンチ）
+   - 期間：2-4週間
+   - 目的：信頼関係構築と欲求喚起
+   - 主要活動：価値あるコンテンツ提供
+
+2. Launch段階（ローンチ）
+   - 期間：3-7日間
+   - 目的：実際の販売とクロージング
+   - 主要活動：オファー提示と限定性演出
+
+3. Post-Launch段階（ポストローンチ）
+   - 期間：継続的
+   - 目的：顧客満足度向上と次回準備
+   - 主要活動：フォローアップとコミュニティ育成
+
+【実践ワーク】
+・あなたの商品に適したタイムラインを設計する
+・各段階で提供する価値を明確にする
+      `
+    },
+    {
+      id: 'psychology',
+      title: '購買心理学の活用',
+      duration: '60分',
+      level: '中級',
+      description: 'PLFで使われる心理学的テクニックを深く学びます',
+      content: `
+【学習目標】
+・購買に影響する心理的要因を理解する
+・PLFで活用される心理学テクニックを学ぶ
+・倫理的な活用方法を身につける
+
+【レッスン内容】
+1. 基本的な購買心理
+   - 感情と論理の役割
+   - 恐怖と欲求の使い分け
+   - 社会的証明の力
+
+2. PLF特有のテクニック
+   - 段階的コミット
+   - 権威性の演出
+   - 希少性と緊急性
+
+3. 倫理的考慮事項
+   - 操作と説得の違い
+   - 顧客の真の利益を考える
+   - 長期的関係性の重要性
+
+【実践ワーク】
+・あなたの顧客の購買心理を分析する
+・適切な心理学テクニックを選択する
+      `
+    }
+  ];
+
+  return (
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">📖 PLF学習コース</h2>
+        <p className="text-gray-600">
+          Product Launch Formulaの基礎から応用まで、体系的に学習できるコースです。
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {lessons.map((lesson) => (
+          <div key={lesson.id} className="border border-gray-200 rounded-lg">
+            <div 
+              className="p-4 cursor-pointer hover:bg-gray-50"
+              onClick={() => setExpandedLesson(expandedLesson === lesson.id ? null : lesson.id)}
+            >
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{lesson.title}</h3>
+                  <p className="text-gray-600 text-sm mb-2">{lesson.description}</p>
+                  <div className="flex space-x-4 text-xs text-gray-500">
+                    <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">⏱️ {lesson.duration}</span>
+                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded">📊 {lesson.level}</span>
+                  </div>
+                </div>
+                <div className="text-gray-400 text-xl ml-4">
+                  {expandedLesson === lesson.id ? '▲' : '▼'}
+                </div>
+              </div>
+            </div>
+            
+            {expandedLesson === lesson.id && (
+              <div className="border-t border-gray-200 p-4 bg-gray-50">
+                <div className="prose max-w-none">
+                  <pre className="whitespace-pre-wrap text-sm text-gray-700 font-sans leading-relaxed">
+                    {lesson.content}
+                  </pre>
+                </div>
+                <div className="mt-4 pt-4 border-t border-gray-300">
+                  <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm font-medium">
+                    📝 学習を開始
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 成功事例集コンポーネント
+function SuccessCasesContent() {
+  const cases = [
+    {
+      title: 'オンライン英会話スクール「FluentSpeak」',
+      industry: '教育・語学',
+      revenue: '月収500万円達成',
+      period: '3ヶ月',
+      description: '初心者向け英会話コースのローンチで驚異的な成果を達成',
+      highlights: ['事前登録者数: 12,000人', 'コンバージョン率: 18%', '平均顧客単価: 98,000円', '解約率: 3%以下'],
+      strategy: '無料英語診断テストで価値提供、限定100名の希少性演出、既存受講生の推薦動画活用',
+      lessons: ['業界特有の不安に対する共感', '小さな成功体験の積み重ね設計', 'コミュニティの力を活用']
+    },
+    {
+      title: 'デジタルマーケティング講座「Growth Hacker Pro」',
+      industry: 'ビジネス・マーケティング',
+      revenue: '初回ローンチで3,000万円',
+      period: '6週間',
+      description: '中小企業経営者向けデジタルマーケティング講座の大成功事例',
+      highlights: ['事前登録者数: 8,500人', 'コンバージョン率: 22%', '平均顧客単価: 180,000円', '受講満足度: 96%'],
+      strategy: 'ターゲット設定の明確化、無料診断ツールで現状分析、業界団体からの推薦状活用',
+      lessons: ['B2Bでの信頼構築には実績と権威性が重要', '具体的なROIを示すことで投資判断を促進', 'アフターサポートの充実が口コミを生む']
+    }
+  ];
+
+  return (
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">🏆 成功事例集</h2>
+        <p className="text-gray-600">実際にPLFを活用して大きな成果を上げた事例を業界別に紹介します。</p>
+      </div>
+      <div className="space-y-6">
+        {cases.map((caseStudy, index) => (
+          <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{caseStudy.title}</h3>
+              <div className="flex space-x-4 text-sm mb-4">
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">{caseStudy.industry}</span>
+                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full">{caseStudy.revenue}</span>
+                <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">期間: {caseStudy.period}</span>
+              </div>
+              <p className="text-gray-700 mb-4">{caseStudy.description}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                {caseStudy.highlights.map((highlight, idx) => (
+                  <div key={idx} className="bg-white p-3 rounded-lg shadow-sm">
+                    <div className="text-xs text-gray-500 mb-1">{highlight.split(':')[0]}</div>
+                    <div className="text-sm font-semibold text-gray-900">{highlight.split(':')[1]}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white p-4 rounded-lg mb-4">
+                <h4 className="font-semibold text-gray-900 mb-2">🎯 戦略のポイント</h4>
+                <p className="text-sm text-gray-700">{caseStudy.strategy}</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">💡 学べるポイント</h4>
+                <ul className="space-y-1">
+                  {caseStudy.lessons.map((lesson, idx) => (
+                    <li key={idx} className="flex items-start space-x-2">
+                      <span className="text-green-500 mt-1">✓</span>
+                      <span className="text-sm text-gray-700">{lesson}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ベストプラクティスコンポーネント
+function BestPracticesContent() {
+  const practices = [
+    {
+      category: 'オンライン教育・コーチング', icon: '🎓',
+      recommendations: [
+        { title: '無料コンテンツの戦略的提供', description: '有料コンテンツの10-15%相当の価値を無料で提供し、信頼を構築', examples: ['無料ミニコース', '診断ツール', 'チェックリスト'] },
+        { title: 'コミュニティ活用', description: '受講生同士の交流を促進し、継続率とLTVを向上', examples: ['Facebookグループ', 'オンラインサロン', '勉強会'] }
+      ]
+    },
+    {
+      category: 'SaaS・ソフトウェア', icon: '💻',
+      recommendations: [
+        { title: 'フリートライアルの最適化', description: '14-30日間の無料体験で価値を実感してもらう', examples: ['機能制限なし', 'オンボーディング強化', '使用状況分析'] },
+        { title: '段階的機能開放', description: 'ローンチ期間中に新機能を順次発表し、注目度を維持', examples: ['β機能先行公開', 'アップデート予告', '限定アクセス'] }
+      ]
+    }
+  ];
+
+  return (
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">⭐ ベストプラクティス</h2>
+        <p className="text-gray-600">業界別の推奨手法とノウハウを集約しました。</p>
+      </div>
+      <div className="space-y-8">
+        {practices.map((category, index) => (
+          <div key={index} className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
+            <div className="flex items-center mb-6">
+              <span className="text-3xl mr-3">{category.icon}</span>
+              <h3 className="text-xl font-bold text-gray-900">{category.category}</h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {category.recommendations.map((rec, idx) => (
+                <div key={idx} className="bg-white rounded-lg p-5 shadow-sm border border-gray-200">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-3">{rec.title}</h4>
+                  <p className="text-gray-700 text-sm mb-4">{rec.description}</p>
+                  <div className="space-y-2">
+                    <h5 className="text-sm font-medium text-gray-600">実装例:</h5>
+                    <ul className="space-y-1">
+                      {rec.examples.map((example, exIdx) => (
+                        <li key={exIdx} className="text-sm text-gray-600 flex items-center">
+                          <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
+                          {example}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// チュートリアルコンポーネント
+function TutorialsContent() {
+  const tutorials = [
+    {
+      title: 'AIローンチくんの基本的な使い方',
+      duration: '10分',
+      description: '商品情報の入力からメール生成まで、基本操作を解説',
+      thumbnail: '🎬',
+      steps: ['ログイン・会員登録の方法', '商品名・トーンの設定', 'メールシーケンスの生成', '個別・一括ダウンロード機能', 'HTMLファイルの活用方法']
+    },
+    {
+      title: '効果的なローンチタイムラインの設計',
+      duration: '15分',
+      description: '成功するローンチのタイムライン設計方法を実例で学習',
+      thumbnail: '📅',
+      steps: ['Pre-Launch期間の設定', 'メール配信スケジュール', 'Launch期間の最適化', 'Post-Launchフォローアップ', 'KPI設定と効果測定']
+    }
+  ];
+
+  return (
+    <div>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">🎥 動画チュートリアル</h2>
+        <p className="text-gray-600">AIローンチくんの使い方から高度なローンチ戦略まで、動画で分かりやすく解説します。</p>
+      </div>
+      <div className="grid md:grid-cols-2 gap-6">
+        {tutorials.map((tutorial, index) => (
+          <div key={index} className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+            <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-8 text-center">
+              <div className="text-6xl mb-4">{tutorial.thumbnail}</div>
+              <span className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-full text-sm">⏱️ {tutorial.duration}</span>
+            </div>
+            <div className="p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{tutorial.title}</h3>
+              <p className="text-gray-600 text-sm mb-4">{tutorial.description}</p>
+              <div className="mb-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-2">学習内容:</h4>
+                <ul className="space-y-1">
+                  {tutorial.steps.map((step, idx) => (
+                    <li key={idx} className="text-sm text-gray-600 flex items-center">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
+                🎬 動画を見る
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
