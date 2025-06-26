@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロダクトローンチ自動生成ツール</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm py-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-2xl font-bold text-gray-900">プロダクトローンチ自動生成ツール</h1>
+            <p class="text-gray-600 mt-1">商品情報を入力すると、メールシーケンスと面談スクリプトを自動生成します</p>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+            <!-- 左カラム：入力フォーム -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <h2 class="text-xl font-semibold mb-4">商品情報入力</h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">商品名 *</label>
+                            <input type="text" id="productName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: AI営業支援ツール">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">ターゲット層 *</label>
+                            <input type="text" id="targetAudience" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: 中小企業の営業責任者">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">メインベネフィット *</label>
+                            <input type="text" id="mainBenefit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: 営業効率を3倍向上">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">ローンチ日 *</label>
+                            <input type="date" id="launchDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">価格 *</label>
+                            <input type="text" id="price" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: 月額29,800円">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">連絡先情報 *</label>
+                            <input type="text" id="contactInfo" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: contact@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">主要機能 *</label>
+                            <textarea id="features" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: AI自動顧客分析、スマート提案機能、レポート自動作成"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">競合分析</label>
+                            <textarea id="competitorAnalysis" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: A社より高機能、B社より低価格"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">独自の価値提案 *</label>
+                            <textarea id="uniqueSellingPoint" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="例: 業界初のAI技術で営業プロセスを完全自動化"></textarea>
+                        </div>
+
+                        <button onclick="generateContent()" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 font-medium">
+                            コンテンツを生成
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中央カラム：メール出力 -->
+            <div class="lg:col-span-1">
+                <div id="outputSection" class="bg-white rounded-lg shadow-md p-6 text-center">
+                    <div class="text-gray-400 mb-4">
+                        <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-600 mb-2">生成されたコンテンツがここに表示されます</h3>
+                    <p class="text-sm text-gray-500">左側のフォームに商品情報を入力して、「コンテンツを生成」ボタンを押してください</p>
+                </div>
+            </div>
+
+            <!-- 右カラム：ポイント解説 -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <h2 class="text-xl font-semibold mb-4 text-orange-700">📝 ローンチ戦略のポイント</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-blue-700 mb-2">【メール①】資料案内 & 事前質問フォーム</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 興味を引く件名で開封率を向上</li>
+                                <li>• 事前質問で見込み客を絞り込み</li>
+                                <li>• 資料請求のハードルを下げる</li>
+                                <li>• 信頼関係構築の第一歩</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-green-700 mb-2">【メール②】質問への回答 & 期待感の醸成</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• よくある質問で不安を解消</li>
+                                <li>• 具体的な数値で信頼性を証明</li>
+                                <li>• 期待感を高めて購買意欲を醸成</li>
+                                <li>• 次のステップへの準備を促進</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-yellow-700 mb-2">【メール③】募集当日の朝（リマインド）</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 朝一番で意識に残るタイミング</li>
+                                <li>• 特別感を演出して緊急性を高める</li>
+                                <li>• 限定性で希少価値を強調</li>
+                                <li>• 一日の始まりで判断力が高い時間帯</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-red-700 mb-2">【メール④】募集開始</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 具体的な申込方法を明示</li>
+                                <li>• 特典で価値を最大化</li>
+                                <li>• 競合との差別化を強調</li>
+                                <li>• 行動を促すCTAを設置</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-purple-700 mb-2">【面談スクリプト】営業トーク</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 課題ヒアリングで共感を得る</li>
+                                <li>• 商品紹介で解決策を提示</li>
+                                <li>• 価格提示のタイミングを最適化</li>
+                                <li>• クロージングで確実に成約</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-md">
+                            <h4 class="font-semibold text-orange-800 mb-2">💡 成功のコツ</h4>
+                            <ul class="text-xs text-orange-700 space-y-1">
+                                <li>• 各メールは1-2日間隔で送信</li>
+                                <li>• 開封率をトラッキングして改善</li>
+                                <li>• A/Bテストで件名を最適化</li>
+                                <li>• フォローアップを忘れずに実施</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateContent() {
+            const formData = {
+                productName: document.getElementById('productName').value,
+                targetAudience: document.getElementById('targetAudience').value,
+                mainBenefit: document.getElementById('mainBenefit').value,
+                launchDate: document.getElementById('launchDate').value,
+                price: document.getElementById('price').value,
+                features: document.getElementById('features').value,
+                competitorAnalysis: document.getElementById('competitorAnalysis').value,
+                uniqueSellingPoint: document.getElementById('uniqueSellingPoint').value,
+                contactInfo: document.getElementById('contactInfo').value
+            };
+
+            if (!formData.productName || !formData.targetAudience) {
+                alert('商品名とターゲット層は必須項目です');
+                return;
+            }
+
+            const email1 = generateEmail1(formData);
+            const email2 = generateEmail2(formData);
+            const email3 = generateEmail3(formData);
+            const email4 = generateEmail4(formData);
+            const script = generateScript(formData);
+
+            const outputHTML = `
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-blue-700">【メール①】資料案内 & 事前質問フォーム</h3>
+                        <div class="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                            <pre class="whitespace-pre-wrap text-xs text-gray-800">${email1}</pre>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-green-700">【メール②】質問への回答 & 期待感の醸成</h3>
+                        <div class="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                            <pre class="whitespace-pre-wrap text-xs text-gray-800">${email2}</pre>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-yellow-700">【メール③】募集当日の朝（リマインド）</h3>
+                        <div class="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                            <pre class="whitespace-pre-wrap text-xs text-gray-800">${email3}</pre>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-red-700">【メール④】募集開始</h3>
+                        <div class="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                            <pre class="whitespace-pre-wrap text-xs text-gray-800">${email4}</pre>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-purple-700">【スクリプト】面談用トークスクリプト</h3>
+                        <div class="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                            <pre class="whitespace-pre-wrap text-xs text-gray-800">${script}</pre>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('outputSection').innerHTML = outputHTML;
+        }
+
+        function generateEmail1(formData) {
+            return `件名: 【特別資料】${formData.productName}のご紹介について
+
+${formData.targetAudience}の皆様
+
+いつもお世話になっております。
+
+この度、${formData.mainBenefit}を実現する革新的なソリューション
+「${formData.productName}」を開発いたしました。
+
+現在、限定で詳細資料をご提供させていただいており、
+事前にいくつかご質問をお聞かせいただければと思います。
+
+▼事前質問フォーム
+https://example.com/form
+
+主な特徴：
+${formData.features}
+
+${formData.uniqueSellingPoint}
+
+ご多忙とは存じますが、ぜひ詳細資料をご確認いただき、
+ご感想をお聞かせください。
+
+何かご質問がございましたら、お気軽にお声がけください。
+
+よろしくお願いいたします。
+
+${formData.contactInfo}`;
+        }
+
+        function generateEmail2(formData) {
+            return `件名: 【回答】${formData.productName}に関するご質問について
+
+${formData.targetAudience}の皆様
+
+先日は事前質問フォームにご回答いただき、
+ありがとうございました。
+
+皆様からいただいたご質問にお答えいたします。
+
+【よくいただいたご質問】
+
+Q: 導入までの期間はどのくらいですか？
+A: 最短2週間で導入可能です。専任サポートが付きます。
+
+Q: 既存システムとの連携は可能ですか？
+A: はい、主要なCRM/SFAシステムとの連携実績があります。
+
+Q: ROIはどの程度期待できますか？
+A: 導入企業様では平均3ヶ月で投資回収を実現されています。
+
+${formData.launchDate}に正式にサービス開始予定です。
+
+現在、特別料金でのご提供を検討しており、
+詳細は明日の朝にご案内いたします。
+
+${formData.mainBenefit}を実現したい企業様は
+この機会をお見逃しなく。
+
+${formData.contactInfo}`;
+        }
+
+        function generateEmail3(formData) {
+            return `件名: 【本日開始】${formData.productName}特別プラン募集のお知らせ
+
+おはようございます。
+
+いよいよ本日、${formData.productName}の
+特別プラン募集を開始いたします！
+
+【募集開始時刻】
+本日 10:00〜
+
+【特別プラン内容】
+・通常価格：${formData.price}
+・特別価格：初月無料 + 30%OFF（3ヶ月間）
+・限定特典：専任コンサルタントによる導入支援
+
+【募集条件】
+・先着20社様限定
+・${formData.launchDate}までにご契約完了
+
+${formData.uniqueSellingPoint}
+
+この機会を逃すと次回は未定です。
+
+10:00になりましたら、改めて詳細をご案内いたします。
+
+お忙しい中恐縮ですが、ご検討のほどよろしくお願いいたします。
+
+${formData.contactInfo}`;
+        }
+
+        function generateEmail4(formData) {
+            return `件名: 【募集開始】${formData.productName}特別プラン申込受付中
+
+${formData.targetAudience}の皆様
+
+お待たせいたしました！
+${formData.productName}特別プランの募集を開始いたします。
+
+■特別プラン詳細
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+▼サービス内容
+${formData.features}
+
+▼価格
+通常価格：${formData.price}/月
+↓
+特別価格：初月無料 + 30%OFF（3ヶ月間）
+
+▼限定特典
+・専任コンサルタントによる導入支援
+・無料カスタマイズ（通常10万円相当）
+・24時間サポート（初月のみ）
+
+▼募集条件
+・先着20社様限定
+・${formData.launchDate}までにご契約完了
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【申込方法】
+下記URLよりお申込みください。
+https://example.com/apply
+
+または、このメールに返信で「申込希望」とご連絡ください。
+詳細資料とお見積もりを即座にお送りいたします。
+
+${formData.competitorAnalysis}という状況の中、
+${formData.uniqueSellingPoint}
+
+この機会をお見逃しなく！
+
+ご質問がございましたら、お気軽にお問い合わせください。
+
+${formData.contactInfo}`;
+        }
+
+        function generateScript(formData) {
+            return `【面談用トークスクリプト】${formData.productName}
+
+■オープニング（アイスブレイク）
+お忙しい中、お時間をいただきありがとうございます。
+本日は${formData.productName}について詳しくご紹介させていただきます。
+まず、現在の営業活動で課題に感じていることはございますか？
+
+■課題のヒアリング
+- 顧客管理で困っていることはありますか？
+- 営業効率化で取り組んでいることはありますか？
+- 競合他社との差別化で悩んでいることはありますか？
+
+■商品紹介
+そのようなお悩みを解決するのが、こちらの${formData.productName}です。
+
+【主な特徴】
+${formData.features}
+
+【他社との違い】
+${formData.uniqueSellingPoint}
+
+実際に導入いただいた企業様では、${formData.mainBenefit}を実現されています。
+
+■価格提示
+通常価格は${formData.price}ですが、
+今回は特別に初月無料＋30%OFF（3ヶ月間）でご提供いたします。
+
+■クロージング
+いかがでしょうか？
+ご不明な点やご質問はございますか？
+
+導入までの流れは以下の通りです：
+1. ご契約（本日中）
+2. 初期設定（1週間）
+3. 運用開始（2週間後）
+
+この特別プランは先着20社様限定で、
+${formData.launchDate}までの期間限定となっております。
+
+今回のご提案についていかがお考えでしょうか？
+
+■次のステップ
+【即決の場合】
+ありがとうございます！それでは契約書類をご準備いたします。
+
+【検討の場合】
+ご検討期間はいつまでを予定されていますか？
+他に確認が必要な点はございますか？
+
+【断られた場合】
+承知いたしました。今後また機会がございましたら、
+ぜひお声がけください。
+
+■フォローアップ
+本日はお時間をいただき、ありがとうございました。
+資料をメールでお送りしますので、ご確認ください。
+
+${formData.contactInfo}`;
+        }
+    </script>
+</body>
+</html>
