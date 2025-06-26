@@ -36,6 +36,7 @@ export default function Home() {
     email5: false,
     script: false,
   });
+  const [showStrategyDropdown, setShowStrategyDropdown] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -76,7 +77,7 @@ export default function Home() {
       <header className="bg-white shadow-sm py-4">
         <div className="max-w-7xl mx-auto px-4">
           <h1 className="text-2xl font-bold text-gray-900">
-            プロダクトローンチ自動生成ツール
+            AIローンチくん
           </h1>
           <p className="text-gray-600 mt-1">
             商品情報を入力すると、メールシーケンスと面談スクリプトを自動生成します
@@ -135,29 +136,81 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* PLF戦略ポイント - 入力フォーム下に移動 */}
+              {/* PLF戦略ポイント - プルダウン形式 */}
               <div className="bg-orange-50 rounded-lg p-4 mt-6">
-                <h3 className="text-lg font-semibold mb-3 text-orange-700">📝 PLF式ローンチ戦略のポイント</h3>
-                <div className="space-y-3 text-sm">
-                  <div className="bg-white p-2 rounded border-l-4 border-blue-500">
-                    <span className="font-medium text-blue-700">【メール①】</span> 信頼関係構築 & 資料で価値提供
-                  </div>
-                  <div className="bg-white p-2 rounded border-l-4 border-green-500">
-                    <span className="font-medium text-green-700">【メール②】</span> Q&A形式で不安解消 & 期待感醸成
-                  </div>
-                  <div className="bg-white p-2 rounded border-l-4 border-yellow-500">
-                    <span className="font-medium text-yellow-700">【メール③】</span> 募集開始予告 & 心理的準備
-                  </div>
-                  <div className="bg-white p-2 rounded border-l-4 border-red-500">
-                    <span className="font-medium text-red-700">【メール④】</span> 限定性強調 & 明確な行動指示
-                  </div>
-                  <div className="bg-white p-2 rounded border-l-4 border-orange-500">
-                    <span className="font-medium text-orange-700">【メール⑤】</span> 面談の目的明確化 & リラックス雰囲気
-                  </div>
-                  <div className="bg-white p-2 rounded border-l-4 border-purple-500">
-                    <span className="font-medium text-purple-700">【スクリプト】</span> 審査形式 & 仮クロージング2回実施
+                <div 
+                  className="cursor-pointer flex justify-between items-center"
+                  onClick={() => setShowStrategyDropdown(!showStrategyDropdown)}
+                >
+                  <h3 className="text-lg font-semibold text-orange-700">📝 PLF式ローンチ戦略のポイント</h3>
+                  <div className="text-orange-700 text-xl">
+                    {showStrategyDropdown ? '▲' : '▼'}
                   </div>
                 </div>
+                
+                {showStrategyDropdown && (
+                  <div className="mt-4 space-y-4">
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                      <h4 className="font-semibold text-blue-700 mb-2">【メール①】資料案内 & 事前質問フォーム</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• 信頼関係の構築から開始</li>
+                        <li>• 資料で価値を先行提供</li>
+                        <li>• 参加フローの明確化</li>
+                        <li>• 迷惑メール対策も忘れずに</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
+                      <h4 className="font-semibold text-green-700 mb-2">【メール②】質問への回答</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• アンケート結果を活用</li>
+                        <li>• 講座内容への反映をアピール</li>
+                        <li>• Q&A形式で不安を解消</li>
+                        <li>• 次回募集への期待感醸成</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-500">
+                      <h4 className="font-semibold text-yellow-700 mb-2">【メール③】募集当日の朝メール</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• 募集開始の最終予告</li>
+                        <li>• よくある質問を事前回答</li>
+                        <li>• 申請フォームの詳細説明</li>
+                        <li>• 心理的準備を整える</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
+                      <h4 className="font-semibold text-red-700 mb-2">【メール④】募集開始 & 面談希望日提出</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• 明確な行動指示（申請URL）</li>
+                        <li>• プログラム概要の再確認</li>
+                        <li>• 限定性の強調（先着制）</li>
+                        <li>• 配信停止オプションの提供</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-orange-500">
+                      <h4 className="font-semibold text-orange-700 mb-2">【メール⑤】面談実施</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• 面談の目的と流れを明確化</li>
+                        <li>• 15分間の効率的な構成</li>
+                        <li>• リラックスした雰囲気作り</li>
+                        <li>• 個別スケジュール調整</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500">
+                      <h4 className="font-semibold text-purple-700 mb-2">【面談スクリプト】実績あるクロージング手法</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• 審査形式で価値を高める</li>
+                        <li>• 仮クロージングを2回実施</li>
+                        <li>• 不安要素を事前に全て解消</li>
+                        <li>• 合格発表で特別感を演出</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
