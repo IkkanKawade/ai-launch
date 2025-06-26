@@ -285,15 +285,15 @@ https://ai-launch.vercel.app
                 商品情報を入力すると、メールシーケンスと面談スクリプトを自動生成します
               </p>
             </div>
-            <nav className="hidden md:flex space-x-4">
-              <span className="text-blue-600 px-3 py-2 rounded-md text-sm font-medium bg-blue-50">
+            <nav className="flex space-x-2 md:space-x-4">
+              <span className="text-blue-600 px-2 md:px-3 py-2 rounded-md text-xs md:text-sm font-medium bg-blue-50">
                 生成ツール
               </span>
               <button
                 onClick={() => setShowLibrary(true)}
-                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-50"
+                className="text-gray-600 hover:text-gray-900 px-2 md:px-3 py-2 rounded-md text-xs md:text-sm font-medium hover:bg-gray-50"
               >
-                📚 ローンチライブラリー
+                📚 ライブラリー
               </button>
             </nav>
           </div>
