@@ -21,10 +21,32 @@ export default function Home() {
   } | null>(null);
 
   const [isGenerating, setIsGenerating] = useState(false);
+  const [collapsedSections, setCollapsedSections] = useState<{
+    email1: boolean;
+    email2: boolean;
+    email3: boolean;
+    email4: boolean;
+    email5: boolean;
+    script: boolean;
+  }>({
+    email1: false,
+    email2: false,
+    email3: false,
+    email4: false,
+    email5: false,
+    script: false,
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const toggleSection = (section: keyof typeof collapsedSections) => {
+    setCollapsedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
   const generateContent = async () => {
@@ -112,6 +134,31 @@ export default function Home() {
                   {isGenerating ? "生成中..." : "コンテンツを生成"}
                 </button>
               </div>
+
+              {/* PLF戦略ポイント - 入力フォーム下に移動 */}
+              <div className="bg-orange-50 rounded-lg p-4 mt-6">
+                <h3 className="text-lg font-semibold mb-3 text-orange-700">📝 PLF式ローンチ戦略のポイント</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-white p-2 rounded border-l-4 border-blue-500">
+                    <span className="font-medium text-blue-700">【メール①】</span> 信頼関係構築 & 資料で価値提供
+                  </div>
+                  <div className="bg-white p-2 rounded border-l-4 border-green-500">
+                    <span className="font-medium text-green-700">【メール②】</span> Q&A形式で不安解消 & 期待感醸成
+                  </div>
+                  <div className="bg-white p-2 rounded border-l-4 border-yellow-500">
+                    <span className="font-medium text-yellow-700">【メール③】</span> 募集開始予告 & 心理的準備
+                  </div>
+                  <div className="bg-white p-2 rounded border-l-4 border-red-500">
+                    <span className="font-medium text-red-700">【メール④】</span> 限定性強調 & 明確な行動指示
+                  </div>
+                  <div className="bg-white p-2 rounded border-l-4 border-orange-500">
+                    <span className="font-medium text-orange-700">【メール⑤】</span> 面談の目的明確化 & リラックス雰囲気
+                  </div>
+                  <div className="bg-white p-2 rounded border-l-4 border-purple-500">
+                    <span className="font-medium text-purple-700">【スクリプト】</span> 審査形式 & 仮クロージング2回実施
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -119,70 +166,142 @@ export default function Home() {
           <div className="lg:col-span-1">
             {generatedContent ? (
               <div className="space-y-4">
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-blue-700">
-                    【メール①】資料案内 & 事前質問フォーム
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.email1}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email1')}
+                  >
+                    <h3 className="text-lg font-semibold text-blue-700">
+                      【メール①】資料案内 & 事前質問フォーム
+                    </h3>
+                    <div className="text-blue-700">
+                      {collapsedSections.email1 ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.email1 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email1}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-green-700">
-                    【メール②】質問への回答
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.email2}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email2')}
+                  >
+                    <h3 className="text-lg font-semibold text-green-700">
+                      【メール②】質問への回答
+                    </h3>
+                    <div className="text-green-700">
+                      {collapsedSections.email2 ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.email2 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email2}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-yellow-700">
-                    【メール③】募集当日の朝メール
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.email3}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email3')}
+                  >
+                    <h3 className="text-lg font-semibold text-yellow-700">
+                      【メール③】募集当日の朝メール
+                    </h3>
+                    <div className="text-yellow-700">
+                      {collapsedSections.email3 ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.email3 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email3}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-red-700">
-                    【メール④】募集開始 & 面談希望日の提出
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.email4}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email4')}
+                  >
+                    <h3 className="text-lg font-semibold text-red-700">
+                      【メール④】募集開始 & 面談希望日の提出
+                    </h3>
+                    <div className="text-red-700">
+                      {collapsedSections.email4 ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.email4 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email4}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-orange-700">
-                    【メール⑤】面談の実施
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.email5}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email5')}
+                  >
+                    <h3 className="text-lg font-semibold text-orange-700">
+                      【メール⑤】面談の実施
+                    </h3>
+                    <div className="text-orange-700">
+                      {collapsedSections.email5 ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.email5 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email5}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold mb-3 text-purple-700">
-                    【スクリプト】面談用トークスクリプト
-                  </h3>
-                  <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
-                    <pre className="whitespace-pre-wrap text-xs text-gray-800">
-                      {generatedContent.script}
-                    </pre>
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('script')}
+                  >
+                    <h3 className="text-lg font-semibold text-purple-700">
+                      【スクリプト】面談用トークスクリプト
+                    </h3>
+                    <div className="text-purple-700">
+                      {collapsedSections.script ? '▼' : '▲'}
+                    </div>
                   </div>
+                  {!collapsedSections.script && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.script}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
@@ -202,73 +321,90 @@ export default function Home() {
             )}
           </div>
 
-          {/* 右カラム：ポイント解説 */}
+          {/* 右カラム：個別ポイント解説 */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-              <h2 className="text-xl font-semibold mb-4 text-orange-700">📝 PLF式ローンチ戦略のポイント</h2>
-              
-              <div className="space-y-6">
-                <div className="bg-blue-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-blue-700 mb-2">【メール①】資料案内 & 事前質問フォーム</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 信頼関係の構築から開始</li>
-                    <li>• 資料で価値を先行提供</li>
-                    <li>• 参加フローの明確化</li>
-                    <li>• 迷惑メール対策も忘れずに</li>
-                  </ul>
-                </div>
+            {generatedContent ? (
+              <div className="space-y-4">
+                {/* メール①の解説 */}
+                {!collapsedSections.email1 && (
+                  <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
+                    <h3 className="font-semibold text-blue-700 mb-2">【メール①】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 信頼関係の構築から開始</li>
+                      <li>• 資料で価値を先行提供</li>
+                      <li>• 参加フローの明確化</li>
+                      <li>• 迷惑メール対策も忘れずに</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-green-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-green-700 mb-2">【メール②】質問への回答</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• アンケート結果を活用</li>
-                    <li>• 講座内容への反映をアピール</li>
-                    <li>• Q&A形式で不安を解消</li>
-                    <li>• 次回募集への期待感醸成</li>
-                  </ul>
-                </div>
+                {/* メール②の解説 */}
+                {!collapsedSections.email2 && (
+                  <div className="bg-green-50 rounded-lg p-4 border-l-4 border-green-500">
+                    <h3 className="font-semibold text-green-700 mb-2">【メール②】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• アンケート結果を活用</li>
+                      <li>• 講座内容への反映をアピール</li>
+                      <li>• Q&A形式で不安を解消</li>
+                      <li>• 次回募集への期待感醸成</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-yellow-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-yellow-700 mb-2">【メール③】募集当日の朝メール</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 募集開始の最終予告</li>
-                    <li>• よくある質問を事前回答</li>
-                    <li>• 申請フォームの詳細説明</li>
-                    <li>• 心理的準備を整える</li>
-                  </ul>
-                </div>
+                {/* メール③の解説 */}
+                {!collapsedSections.email3 && (
+                  <div className="bg-yellow-50 rounded-lg p-4 border-l-4 border-yellow-500">
+                    <h3 className="font-semibold text-yellow-700 mb-2">【メール③】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 募集開始の最終予告</li>
+                      <li>• よくある質問を事前回答</li>
+                      <li>• 申請フォームの詳細説明</li>
+                      <li>• 心理的準備を整える</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-red-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-red-700 mb-2">【メール④】募集開始 & 面談希望日提出</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 明確な行動指示（申請URL）</li>
-                    <li>• プログラム概要の再確認</li>
-                    <li>• 限定性の強調（先着制）</li>
-                    <li>• 配信停止オプションの提供</li>
-                  </ul>
-                </div>
+                {/* メール④の解説 */}
+                {!collapsedSections.email4 && (
+                  <div className="bg-red-50 rounded-lg p-4 border-l-4 border-red-500">
+                    <h3 className="font-semibold text-red-700 mb-2">【メール④】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 明確な行動指示（申請URL）</li>
+                      <li>• プログラム概要の再確認</li>
+                      <li>• 限定性の強調（先着制）</li>
+                      <li>• 配信停止オプションの提供</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-orange-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-orange-700 mb-2">【メール⑤】面談実施</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 面談の目的と流れを明確化</li>
-                    <li>• 15分間の効率的な構成</li>
-                    <li>• リラックスした雰囲気作り</li>
-                    <li>• 個別スケジュール調整</li>
-                  </ul>
-                </div>
+                {/* メール⑤の解説 */}
+                {!collapsedSections.email5 && (
+                  <div className="bg-orange-50 rounded-lg p-4 border-l-4 border-orange-500">
+                    <h3 className="font-semibold text-orange-700 mb-2">【メール⑤】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 面談の目的と流れを明確化</li>
+                      <li>• 15分間の効率的な構成</li>
+                      <li>• リラックスした雰囲気作り</li>
+                      <li>• 個別スケジュール調整</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-purple-50 p-3 rounded-md">
-                  <h3 className="font-semibold text-purple-700 mb-2">【面談スクリプト】実績あるクロージング手法</h3>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• 審査形式で価値を高める</li>
-                    <li>• 仮クロージングを2回実施</li>
-                    <li>• 不安要素を事前に全て解消</li>
-                    <li>• 合格発表で特別感を演出</li>
-                  </ul>
-                </div>
+                {/* スクリプトの解説 */}
+                {!collapsedSections.script && (
+                  <div className="bg-purple-50 rounded-lg p-4 border-l-4 border-purple-500">
+                    <h3 className="font-semibold text-purple-700 mb-2">【面談スクリプト】戦略ポイント</h3>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 審査形式で価値を高める</li>
+                      <li>• 仮クロージングを2回実施</li>
+                      <li>• 不安要素を事前に全て解消</li>
+                      <li>• 合格発表で特別感を演出</li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className="bg-gray-100 p-4 rounded-md">
+                {/* 常に表示する実績データ */}
+                <div className="bg-gray-100 rounded-lg p-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🎯 iSara実績データ</h4>
                   <ul className="text-xs text-gray-700 space-y-1">
                     <li>• 600名応募→10名限定の高倍率</li>
@@ -278,7 +414,7 @@ export default function Home() {
                   </ul>
                 </div>
 
-                <div className="bg-indigo-50 p-4 rounded-md">
+                <div className="bg-indigo-50 rounded-lg p-4">
                   <h4 className="font-semibold text-indigo-800 mb-2">💡 PLF成功の9つのトリガー</h4>
                   <ul className="text-xs text-indigo-700 space-y-1">
                     <li>• 権威性・返報性・信頼</li>
@@ -287,7 +423,14 @@ export default function Home() {
                   </ul>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                <h2 className="text-xl font-semibold mb-4 text-gray-700">📋 戦略解説</h2>
+                <p className="text-gray-500 text-center">
+                  コンテンツを生成すると、各セクションの詳細な戦略ポイントがここに表示されます
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
