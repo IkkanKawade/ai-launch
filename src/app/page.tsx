@@ -456,25 +456,6 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* 常に表示する実績データ */}
-                <div className="bg-gray-100 rounded-lg p-4">
-                  <h4 className="font-semibold text-gray-800 mb-2">🎯 iSara実績データ</h4>
-                  <ul className="text-xs text-gray-700 space-y-1">
-                    <li>• 600名応募→10名限定の高倍率</li>
-                    <li>• 面談実施率：ほぼ100%</li>
-                    <li>• 面談から成約率：約80%</li>
-                    <li>• 外貨獲得サロン：678名→10名</li>
-                  </ul>
-                </div>
-
-                <div className="bg-indigo-50 rounded-lg p-4">
-                  <h4 className="font-semibold text-indigo-800 mb-2">💡 PLF成功の9つのトリガー</h4>
-                  <ul className="text-xs text-indigo-700 space-y-1">
-                    <li>• 権威性・返報性・信頼</li>
-                    <li>• 期待・好感度・イベント</li>
-                    <li>• コミュニティ・限定性・社会的証明</li>
-                  </ul>
-                </div>
               </div>
             ) : (
               <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
