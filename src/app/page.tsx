@@ -19,6 +19,7 @@ export default function Home() {
     email3: string;
     email4: string;
     email5: string;
+    email6: string;
     script: string;
   } | null>(null);
 
@@ -29,6 +30,7 @@ export default function Home() {
     email3: boolean;
     email4: boolean;
     email5: boolean;
+    email6: boolean;
     script: boolean;
   }>({
     email1: false,
@@ -36,6 +38,7 @@ export default function Home() {
     email3: false,
     email4: false,
     email5: false,
+    email6: false,
     script: false,
   });
   const [showStrategyDropdown, setShowStrategyDropdown] = useState(false);
@@ -60,6 +63,7 @@ export default function Home() {
     const email3 = generateEmail3(formData);
     const email4 = generateEmail4(formData);
     const email5 = generateEmail5(formData);
+    const email6 = generateEmail6(formData);
     const script = generateScript(formData);
 
     setGeneratedContent({
@@ -68,6 +72,7 @@ export default function Home() {
       email3,
       email4,
       email5,
+      email6,
       script,
     });
     
@@ -157,8 +162,19 @@ export default function Home() {
                 
                 {showStrategyDropdown && (
                   <div className="mt-4 space-y-4">
+                    <div className="bg-white p-4 rounded-lg border-l-4 border-indigo-500">
+                      <h4 className="font-semibold text-indigo-700 mb-2">【メール①】LP情報</h4>
+                      <ul className="text-sm text-gray-700 space-y-1">
+                        <li>• ビジョン共有で共感者を集める</li>
+                        <li>• 将来性と成長可能性の演出</li>
+                        <li>• 仲間募集で特別感・選ばれ感創出</li>
+                        <li>• 夢と理念で心理的結束を図る</li>
+                        <li>• 資料請求への自然な流れ作り</li>
+                      </ul>
+                    </div>
+
                     <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
-                      <h4 className="font-semibold text-blue-700 mb-2">【メール①】資料案内 & 事前質問フォーム</h4>
+                      <h4 className="font-semibold text-blue-700 mb-2">【メール②】資料案内 & 事前質問フォーム</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 資料請求で段階的Yesを構築</li>
                         <li>• 質問フォームで個別化・関心度測定</li>
@@ -169,7 +185,7 @@ export default function Home() {
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
-                      <h4 className="font-semibold text-green-700 mb-2">【メール②】質問への回答</h4>
+                      <h4 className="font-semibold text-green-700 mb-2">【メール③】質問への回答</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 代理質問で疑問を事前解消</li>
                         <li>• 社会的証明の強化（他者の声）</li>
@@ -180,7 +196,7 @@ export default function Home() {
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-500">
-                      <h4 className="font-semibold text-yellow-700 mb-2">【メール③】募集当日の朝メール</h4>
+                      <h4 className="font-semibold text-yellow-700 mb-2">【メール④】募集当日の朝メール</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 最高潮の欲求状態で決断日を迎える</li>
                         <li>• 時間的希少性の最終演出</li>
@@ -191,7 +207,7 @@ export default function Home() {
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
-                      <h4 className="font-semibold text-red-700 mb-2">【メール④】募集開始 & 面談希望日提出</h4>
+                      <h4 className="font-semibold text-red-700 mb-2">【メール⑤】募集開始 & 面談希望日提出</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 即座の行動要求（先着制限定）</li>
                         <li>• 面談＝権威者審査の価値演出</li>
@@ -202,7 +218,7 @@ export default function Home() {
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-orange-500">
-                      <h4 className="font-semibold text-orange-700 mb-2">【メール⑤】面談実施</h4>
+                      <h4 className="font-semibold text-orange-700 mb-2">【メール⑥】面談実施</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• 面談＝審査という権威性確立</li>
                         <li>• 面談前の期待値・緊張感調整</li>
@@ -237,10 +253,10 @@ export default function Home() {
                     className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                     onClick={() => toggleSection('email1')}
                   >
-                    <h3 className="text-lg font-semibold text-blue-700">
-                      【メール①】資料案内 & 事前質問フォーム
+                    <h3 className="text-lg font-semibold text-indigo-700">
+                      【メール①】LP情報
                     </h3>
-                    <div className="text-blue-700">
+                    <div className="text-indigo-700">
                       {collapsedSections.email1 ? '▼' : '▲'}
                     </div>
                   </div>
@@ -260,10 +276,10 @@ export default function Home() {
                     className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                     onClick={() => toggleSection('email2')}
                   >
-                    <h3 className="text-lg font-semibold text-green-700">
-                      【メール②】質問への回答
+                    <h3 className="text-lg font-semibold text-blue-700">
+                      【メール②】資料案内 & 事前質問フォーム
                     </h3>
-                    <div className="text-green-700">
+                    <div className="text-blue-700">
                       {collapsedSections.email2 ? '▼' : '▲'}
                     </div>
                   </div>
@@ -283,10 +299,10 @@ export default function Home() {
                     className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                     onClick={() => toggleSection('email3')}
                   >
-                    <h3 className="text-lg font-semibold text-yellow-700">
-                      【メール③】募集当日の朝メール
+                    <h3 className="text-lg font-semibold text-green-700">
+                      【メール③】質問への回答
                     </h3>
-                    <div className="text-yellow-700">
+                    <div className="text-green-700">
                       {collapsedSections.email3 ? '▼' : '▲'}
                     </div>
                   </div>
@@ -306,10 +322,10 @@ export default function Home() {
                     className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                     onClick={() => toggleSection('email4')}
                   >
-                    <h3 className="text-lg font-semibold text-red-700">
-                      【メール④】募集開始 & 面談希望日の提出
+                    <h3 className="text-lg font-semibold text-yellow-700">
+                      【メール④】募集当日の朝メール
                     </h3>
-                    <div className="text-red-700">
+                    <div className="text-yellow-700">
                       {collapsedSections.email4 ? '▼' : '▲'}
                     </div>
                   </div>
@@ -329,10 +345,10 @@ export default function Home() {
                     className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                     onClick={() => toggleSection('email5')}
                   >
-                    <h3 className="text-lg font-semibold text-orange-700">
-                      【メール⑤】面談の実施
+                    <h3 className="text-lg font-semibold text-red-700">
+                      【メール⑤】募集開始 & 面談希望日提出
                     </h3>
-                    <div className="text-orange-700">
+                    <div className="text-red-700">
                       {collapsedSections.email5 ? '▼' : '▲'}
                     </div>
                   </div>
@@ -341,6 +357,29 @@ export default function Home() {
                       <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
                         <pre className="whitespace-pre-wrap text-xs text-gray-800">
                           {generatedContent.email5}
+                        </pre>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="bg-white rounded-lg shadow-md">
+                  <div 
+                    className="p-4 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                    onClick={() => toggleSection('email6')}
+                  >
+                    <h3 className="text-lg font-semibold text-orange-700">
+                      【メール⑥】面談実施
+                    </h3>
+                    <div className="text-orange-700">
+                      {collapsedSections.email6 ? '▼' : '▲'}
+                    </div>
+                  </div>
+                  {!collapsedSections.email6 && (
+                    <div className="px-4 pb-4">
+                      <div className="bg-gray-50 p-4 rounded-md max-h-96 overflow-y-auto">
+                        <pre className="whitespace-pre-wrap text-xs text-gray-800">
+                          {generatedContent.email6}
                         </pre>
                       </div>
                     </div>
@@ -487,6 +526,140 @@ export default function Home() {
 
 function generateEmail1(formData: FormData): string {
   if (formData.tone === 'influencer') {
+    return `件名: ${formData.productName}を公開します【日本１位を取るので、仲間の募集です】
+
+こんにちは、○○です。
+${formData.productName}を公開します。
+
+■ ${formData.productName}とは
+日本人の成長と成果創出をサポートします。
+
+□ なぜ、やるのか？
+日本の競争力が下がっており、個人のスキルアップが急務です。
+国内だけで競っていても、成長に限界があります。
+
+成功している人たちは、常に新しいスキルを身につけています。
+なぜなら成長が止まったら、すぐに置いていかれるから。
+僕は多くの成功者を見てきて、共通点に気づきました。
+
+じゃあ、どうするか？
+思考を「現状維持から成長」に移動するだけです。これで無限のチャンスです。
+こういった内容を${formData.productName}で伝えます。次で詳しく説明します。
+
+■${formData.productName}の内容とは
+次の３つの内容を提供します。
+
+・その①：成果創出に必要な情報
+・その②：成果創出に最適な環境
+・その③：安心して絡める仲間達
+
+□その①：成果創出に必要な情報
+専用コミュニティで情報提供します。
+
+情報提供しつつ、そこから実践的なコンテンツを作ります。
+そして実践を通じて成果を生みつつ、事業化します。
+
+これだけじゃなく、他にも色々なビジネスを作る予定。
+学ぶだけじゃなく、実際に参加して成長してください。成果を分かち合います。
+
+□その②：成果創出に最適な環境
+完全に独学で、成果を出せるか？
+YESだけど、効率が悪いと思います。
+
+僕の身の回りでは、急激に成果を出す人が増えています。
+１人の仲間が成果を出すと、その情報が広まりました。
+
+仲間が挑戦して結果を出せば、自分も行動しようと思えます。
+環境があると、人は行動できます。この環境も提供します。
+
+専用コミュニティだけじゃなく、リアルイベントも作ります。
+定期的に「成果報告会」も開催します。メンバーのみ参加可能。
+あとは定期的に「実践合宿イベント」も開催します。
+
+外に出て人と会い空気を感じ、そこから行動に繋げます。
+日本人の成長サポートは、僕の夢でした。これから実行します。
+
+□その③：安心して絡める仲間達
+${formData.productName}は「スクール」じゃないです。
+本気で成長する日本人が集い、高め合う場所です。
+
+・時にはビジネス相談して、そこからアイデアを考える
+・時には仲間の事業をサポートして、互いに成果を分かち合う
+・時には遊び企画を実行し、そこからもアイデアが生まれる
+
+こういった環境を作ります。
+メンバー全員と面談して、相性や目標の合うメンバーだけを集めます。
+
+■初期メンバーの募集です
+本気で成果創出を目指したい人へ、是非どうぞ。
+
+・成果創出するだけじゃなく、事業も作ります
+・まずは成長できる環境とコミュニティの構築
+・次に実践的なメディアを作り、業界１位にします
+
+僕は発信と実践が得意で、突き抜けました。
+${formData.productName}でもトップを取ります。初期メンバー募集です。
+
+価格は詳細資料に記載。初回募集は１０名限定です。
+興味ある方は、下記からフォーム入力ください。
+
+>> 資料請求フォーム（３秒で完了します）
+
+募集開始は「今週末の土曜日：○月○日」です。
+お昼から実施予定。ぜひ予定を空けておいてください。
+
+以上です。これは僕の新しい挑戦です。
+昔から日本人の成長を支援することが夢でした。実行します。
+
+👉ポイント：最後は夢で締めて、共感と信頼を獲得する
+`;
+  } else {
+    return `件名: 【重要】${formData.productName}のご案内について
+
+いつもお世話になっております。
+
+この度、新しいサービス「${formData.productName}」のご案内をさせていただきます。
+
+■ ${formData.productName}について
+現代の競争環境において、継続的な成長と学習は必要不可欠となっております。
+当サービスは、皆様の成長支援と成果創出を目的として開発いたしました。
+
+■ サービス内容
+次の３つの要素を中心に構成しております。
+
+１．体系的な学習プログラム
+専門的な知識とスキルを効率的に習得いただけるカリキュラムをご用意しております。
+
+２．実践的な環境の提供
+学習した内容を実際に活用できる場を提供し、実践を通じた成長を支援いたします。
+
+３．同志との ネットワーク構築
+同じ目標を持つ仲間とのつながりを通じて、継続的な学習とモチベーション維持を図ります。
+
+■ 募集概要
+・対象者：本気で成長を目指される方
+・募集人数：初回限定１０名様
+・期間：○ヶ月間の集中プログラム
+・形式：オンライン＋対面イベント
+
+詳細につきましては、下記より資料をご請求ください。
+
+>> 詳細資料請求フォーム
+
+募集開始日：○月○日（土）12:00〜
+※お申込み多数の場合は、面談により選考させていただきます。
+
+皆様の成長と成功を心より応援しております。
+ご質問等ございましたら、お気軽にお問い合わせください。
+
+何卒よろしくお願い申し上げます。
+
+${formData.productName}運営事務局`;
+  }
+}
+
+function generateEmail2(formData: FormData): string {
+  if (formData.tone === 'influencer') {
     return `件名: 【${formData.productName}の件／○○】
 
 こんにちは、○○です。
@@ -606,7 +779,7 @@ ${formData.productName}代表○○`;
   }
 }
 
-function generateEmail2(formData: FormData): string {
+function generateEmail3(formData: FormData): string {
   return `件名: 【アンケート回答】${formData.productName}についてお答えします
 
 いつもお世話になっております。
@@ -672,7 +845,7 @@ function generateEmail2(formData: FormData): string {
 ${formData.productName}代表○○`;
 }
 
-function generateEmail3(formData: FormData): string {
+function generateEmail4(formData: FormData): string {
   return `件名: 【本日開始】${formData.productName}面談受付を開始します
 
 いつもお世話になっております。
@@ -717,7 +890,7 @@ https://example.com/resource
 ${formData.productName}代表○○`;
 }
 
-function generateEmail4(formData: FormData): string {
+function generateEmail5(formData: FormData): string {
   return `件名: 【募集開始】${formData.productName}面談申請受付を開始いたします
 
 いつもお世話になっております。
@@ -767,7 +940,7 @@ ${formData.productName}代表○○
 今後の案内を希望しない場合は、こちらから解除できます。`;
 }
 
-function generateEmail5(formData: FormData): string {
+function generateEmail6(formData: FormData): string {
   return `件名: 【面談調整】${formData.productName}面談日程のご案内
 
 いつもお世話になっております。
