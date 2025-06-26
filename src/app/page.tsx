@@ -4,11 +4,13 @@ import { useState } from "react";
 
 interface FormData {
   productName: string;
+  tone: 'school' | 'influencer';
 }
 
 export default function Home() {
   const [formData, setFormData] = useState<FormData>({
     productName: "",
+    tone: "school",
   });
 
   const [generatedContent, setGeneratedContent] = useState<{
@@ -38,7 +40,7 @@ export default function Home() {
   });
   const [showStrategyDropdown, setShowStrategyDropdown] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -117,14 +119,19 @@ export default function Home() {
                   />
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">📊 生成される内容</h4>
-                  <ul className="text-sm text-blue-700 space-y-1">
-                    <li>• 5つのメールシーケンス</li>
-                    <li>• 面談用トークスクリプト</li>
-                    <li>• iSara式の実績あるテンプレート</li>
-                    <li>• PLF理論に基づく構成</li>
-                  </ul>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    文章のトーン *
+                  </label>
+                  <select
+                    name="tone"
+                    value={formData.tone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                  >
+                    <option value="school">オンラインスクール系（丁寧・フォーマル）</option>
+                    <option value="influencer">個人インフルエンサー系（親しみやすい・カジュアル）</option>
+                  </select>
                 </div>
 
                 <button
@@ -473,7 +480,65 @@ export default function Home() {
 }
 
 function generateEmail1(formData: FormData): string {
-  return `件名: 【資料請求完了】${formData.productName}の資料をお送りします
+  if (formData.tone === 'influencer') {
+    return `件名: 【資料お渡し完了✨】${formData.productName}の詳細資料をお送りしました！
+
+こんにちは！
+
+${formData.productName}を運営している○○です😊
+この度は資料請求していただき、本当にありがとうございます！
+興味を持っていただけて、めちゃくちゃ嬉しいです🎉
+
+さっそく、${formData.productName}の詳細資料をお送りしますね！
+
+【📖 ${formData.productName} 詳細資料はこちら】
+https://example.com/resource
+
+スマホでも見やすく作ったので、ぜひチェックしてみてください✨
+
+【📝 事前アンケートにもご協力ください】
+https://example.com/questionnaire
+
+資料を読んでいただいた後、ぜひこちらのアンケートにもお答えください！
+皆さんの声を聞いて、より良いコンテンツにしていきたいんです🔥
+※3分くらいで終わります！
+
+次回の${formData.productName}の開催日程は、まだ調整中です。
+決まり次第、真っ先にお知らせしますので楽しみにしていてくださいね！
+
+📅 今後の予定
+・次期募集：2024年○月予定
+・個別説明会：募集開始前に実施
+
+説明会の募集も同時にスタートします！
+気になることがあれば、この段階で全部解決できるので安心してくださいね😌
+
+【参加までの流れ】
+①資料請求 ←今ココ！
+②個別説明会参加（無料）
+③事前学習期間
+④本講座スタート
+⑤卒業後サポート
+
+説明会では、${formData.productName}のより詳しい内容をお話しします。
+あなたが今抱えている課題や、どんなことを学びたいかも聞かせてください！
+
+もちろん、説明会の後でじっくり考えていただいてOKです👍
+ただし、毎回定員がすぐに埋まってしまうので、お早めの参加をおすすめします⚡
+
+何か質問があれば、このメールに返信してくださいね！
+24時間以内にお返事します📧
+
+【重要なお知らせ📮】
+メールが迷惑メールフォルダに入ってしまうことがあります。
+${formData.productName}の最新情報を確実に受け取りたい方は、
+私のメールアドレスを連絡先に追加しておいてくださいね！
+
+それでは、資料を楽しみながら読んでください✨
+
+${formData.productName} ○○`;
+  } else {
+    return `件名: 【資料請求完了】${formData.productName}の資料をお送りします
 
 お忙しい中、お時間をいただきありがとうございます。
 
@@ -537,6 +602,7 @@ ${formData.productName}に特に興味をお持ちの方は、送信者アドレ
 
 ーーー
 ${formData.productName}代表○○`;
+  }
 }
 
 function generateEmail2(formData: FormData): string {
