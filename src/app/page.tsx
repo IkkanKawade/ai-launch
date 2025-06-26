@@ -160,60 +160,66 @@ export default function Home() {
                     <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
                       <h4 className="font-semibold text-blue-700 mb-2">【メール①】資料案内 & 事前質問フォーム</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• 信頼関係の構築から開始</li>
-                        <li>• 資料で価値を先行提供</li>
-                        <li>• 参加フローの明確化</li>
-                        <li>• 迷惑メール対策も忘れずに</li>
+                        <li>• 資料請求で段階的Yesを構築</li>
+                        <li>• 質問フォームで個別化・関心度測定</li>
+                        <li>• 希少性演出（限定公開資料）</li>
+                        <li>• セミナー前の欲求最大化準備</li>
+                        <li>• 面談への心理的ハードル下げ</li>
                       </ul>
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
                       <h4 className="font-semibold text-green-700 mb-2">【メール②】質問への回答</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• アンケート結果を活用</li>
-                        <li>• 講座内容への反映をアピール</li>
-                        <li>• Q&A形式で不安を解消</li>
-                        <li>• 次回募集への期待感醸成</li>
+                        <li>• 代理質問で疑問を事前解消</li>
+                        <li>• 社会的証明の強化（他者の声）</li>
+                        <li>• 決断阻害要因の段階的除去</li>
+                        <li>• 限定性への期待値醸成</li>
+                        <li>• セミナー欲求のさらなる最大化</li>
                       </ul>
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-yellow-500">
                       <h4 className="font-semibold text-yellow-700 mb-2">【メール③】募集当日の朝メール</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• 募集開始の最終予告</li>
-                        <li>• よくある質問を事前回答</li>
-                        <li>• 申請フォームの詳細説明</li>
-                        <li>• 心理的準備を整える</li>
+                        <li>• 最高潮の欲求状態で決断日を迎える</li>
+                        <li>• 時間的希少性の最終演出</li>
+                        <li>• 残り質問の完全除去</li>
+                        <li>• 申込への具体的行動指示</li>
+                        <li>• 決断回避の逃げ道を封鎖</li>
                       </ul>
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-red-500">
                       <h4 className="font-semibold text-red-700 mb-2">【メール④】募集開始 & 面談希望日提出</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• 明確な行動指示（申請URL）</li>
-                        <li>• プログラム概要の再確認</li>
-                        <li>• 限定性の強調（先着制）</li>
-                        <li>• 配信停止オプションの提供</li>
+                        <li>• 即座の行動要求（先着制限定）</li>
+                        <li>• 面談＝権威者審査の価値演出</li>
+                        <li>• 申込者向け特別扱い感の創出</li>
+                        <li>• 数量限定による緊急性増大</li>
+                        <li>• 逸失恐怖（FOMO）の活用</li>
                       </ul>
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-orange-500">
                       <h4 className="font-semibold text-orange-700 mb-2">【メール⑤】面談実施</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• 面談の目的と流れを明確化</li>
-                        <li>• 15分間の効率的な構成</li>
-                        <li>• リラックスした雰囲気作り</li>
-                        <li>• 個別スケジュール調整</li>
+                        <li>• 面談＝審査という権威性確立</li>
+                        <li>• 面談前の期待値・緊張感調整</li>
+                        <li>• 簡潔さで専門性・効率性演出</li>
+                        <li>• リラックス雰囲気で本音引出し</li>
+                        <li>• 合格発表形式で特別感創出</li>
                       </ul>
                     </div>
 
                     <div className="bg-white p-4 rounded-lg border-l-4 border-purple-500">
                       <h4 className="font-semibold text-purple-700 mb-2">【面談スクリプト】実績あるクロージング手法</h4>
                       <ul className="text-sm text-gray-700 space-y-1">
-                        <li>• 審査形式で価値を高める</li>
-                        <li>• 仮クロージングを2回実施</li>
-                        <li>• 不安要素を事前に全て解消</li>
-                        <li>• 合格発表で特別感を演出</li>
+                        <li>• 審査権威性で相手の立場逆転</li>
+                        <li>• 2回の仮クロージングで段階的合意</li>
+                        <li>• 購入阻害要因の完全除去</li>
+                        <li>• 合格通知で選抜感・特別感演出</li>
+                        <li>• 即決への心理的圧力構築</li>
                       </ul>
                     </div>
                   </div>
