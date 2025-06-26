@@ -2,13 +2,19 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import RegisterPage from './RegisterPage';
 
 export default function LoginPage() {
+  const [showRegister, setShowRegister] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
+
+  if (showRegister) {
+    return <RegisterPage onBackToLogin={() => setShowRegister(false)} />;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,6 +108,17 @@ export default function LoginPage() {
               ) : (
                 'ログイン'
               )}
+            </button>
+          </div>
+
+          <div className="text-center">
+            <span className="text-sm text-gray-600">アカウントをお持ちでない方は </span>
+            <button
+              type="button"
+              onClick={() => setShowRegister(true)}
+              className="text-sm text-green-600 hover:text-green-500 font-medium"
+            >
+              新規登録
             </button>
           </div>
 
