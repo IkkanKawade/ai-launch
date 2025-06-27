@@ -807,10 +807,10 @@ https://ai-launch.vercel.app
 
       {/* ローンチライブラリーモーダル */}
       {showLibrary && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white rounded-lg w-full max-w-[95vw] sm:max-w-[90vw] lg:max-w-6xl xl:max-w-7xl max-h-[95vh] overflow-hidden">
             {/* モーダルヘッダー */}
-            <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 sm:p-6">
               <div className="flex justify-between items-center">
                 <div>
                   <h2 className="text-2xl font-bold">📚 ローンチライブラリー</h2>
@@ -827,10 +827,10 @@ https://ai-launch.vercel.app
 
             {/* タブナビゲーション */}
             <div className="border-b border-gray-200 bg-gray-50">
-              <nav className="flex px-6">
+              <nav className="flex px-4 sm:px-6 overflow-x-auto">
                 <button
                   onClick={() => setActiveLibraryTab('course')}
-                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-3 sm:py-4 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                     activeLibraryTab === 'course' 
                       ? 'border-blue-500 text-blue-600' 
                       : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -840,7 +840,7 @@ https://ai-launch.vercel.app
                 </button>
                 <button
                   onClick={() => setActiveLibraryTab('cases')}
-                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-3 sm:py-4 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                     activeLibraryTab === 'cases' 
                       ? 'border-blue-500 text-blue-600' 
                       : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -850,7 +850,7 @@ https://ai-launch.vercel.app
                 </button>
                 <button
                   onClick={() => setActiveLibraryTab('practices')}
-                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-3 sm:py-4 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                     activeLibraryTab === 'practices' 
                       ? 'border-blue-500 text-blue-600' 
                       : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -860,7 +860,7 @@ https://ai-launch.vercel.app
                 </button>
                 <button
                   onClick={() => setActiveLibraryTab('tutorials')}
-                  className={`py-4 px-4 border-b-2 font-medium text-sm ${
+                  className={`py-3 px-3 sm:py-4 sm:px-4 border-b-2 font-medium text-xs sm:text-sm whitespace-nowrap ${
                     activeLibraryTab === 'tutorials' 
                       ? 'border-blue-500 text-blue-600' 
                       : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -872,7 +872,7 @@ https://ai-launch.vercel.app
             </div>
 
             {/* コンテンツエリア */}
-            <div className="p-6 overflow-y-auto max-h-[60vh]">
+            <div className="p-4 sm:p-6 overflow-y-auto" style={{maxHeight: 'calc(95vh - 160px)'}}>
               {activeLibraryTab === 'course' && <PLFCourseContent />}
               {activeLibraryTab === 'cases' && <SuccessCasesContent />}
               {activeLibraryTab === 'practices' && <BestPracticesContent />}
