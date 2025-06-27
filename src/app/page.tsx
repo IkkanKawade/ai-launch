@@ -807,8 +807,8 @@ https://ai-launch.vercel.app
 
       {/* ローンチライブラリーモーダル */}
       {showLibrary && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-          <div className="bg-white rounded-lg w-full max-w-[95vw] sm:max-w-[90vw] lg:max-w-6xl xl:max-w-7xl max-h-[95vh] overflow-hidden">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg w-full max-w-7xl mx-auto max-h-[95vh] overflow-hidden">
             {/* モーダルヘッダー */}
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 sm:p-6">
               <div className="flex justify-between items-center">
@@ -872,7 +872,7 @@ https://ai-launch.vercel.app
             </div>
 
             {/* コンテンツエリア */}
-            <div className="p-4 sm:p-6 overflow-y-auto" style={{maxHeight: 'calc(95vh - 160px)'}}>
+            <div className="px-4 py-6 overflow-y-auto max-w-7xl mx-auto" style={{maxHeight: 'calc(95vh - 160px)'}}>
               {activeLibraryTab === 'course' && <PLFCourseContent />}
               {activeLibraryTab === 'cases' && <SuccessCasesContent />}
               {activeLibraryTab === 'practices' && <BestPracticesContent />}
