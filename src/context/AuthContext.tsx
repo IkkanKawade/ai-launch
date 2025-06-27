@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
   username: string;
@@ -110,7 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   // ページ読み込み時に認証状態を復元
-  useState(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedAuth = localStorage.getItem('auth');
       const savedUser = localStorage.getItem('user');
@@ -119,7 +119,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(savedUser);
       }
     }
-  });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, register, logout, user }}>
