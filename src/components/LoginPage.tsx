@@ -89,12 +89,12 @@ export default function LoginPage() {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer z-20"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  <span className="text-gray-400 hover:text-gray-600">
-                    {showPassword ? "👁️" : "👁️‍🗨️"}
-                  </span>
+                  <div className="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-gray-700 bg-white rounded border border-gray-300">
+                    {showPassword ? "🙈" : "👁️"}
+                  </div>
                 </button>
               </div>
             </div>
@@ -135,11 +135,26 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-6 bg-blue-50 rounded-lg p-4">
-            <h3 className="text-sm font-medium text-blue-900 mb-2">デモアカウント:</h3>
-            <div className="text-xs text-blue-800 space-y-1">
-              <div>• admin / admin123</div>
-              <div>• user / user123</div>
-              <div>• demo / demo123</div>
+            <h3 className="text-sm font-medium text-blue-900 mb-2">🔓 誰でも使えるログイン情報:</h3>
+            <div className="text-sm text-blue-800 space-y-2">
+              <div className="bg-white p-2 rounded border">
+                <div className="font-medium">管理者アカウント</div>
+                <div>ユーザー名: <span className="font-mono bg-gray-100 px-1 rounded">admin</span></div>
+                <div>パスワード: <span className="font-mono bg-gray-100 px-1 rounded">admin123</span></div>
+              </div>
+              <div className="bg-white p-2 rounded border">
+                <div className="font-medium">一般ユーザー</div>
+                <div>ユーザー名: <span className="font-mono bg-gray-100 px-1 rounded">user</span></div>
+                <div>パスワード: <span className="font-mono bg-gray-100 px-1 rounded">user123</span></div>
+              </div>
+              <div className="bg-white p-2 rounded border">
+                <div className="font-medium">デモアカウント</div>
+                <div>ユーザー名: <span className="font-mono bg-gray-100 px-1 rounded">demo</span></div>
+                <div>パスワード: <span className="font-mono bg-gray-100 px-1 rounded">demo123</span></div>
+              </div>
+            </div>
+            <div className="mt-2 text-xs text-blue-600">
+              ↑ 上記のどれでもコピー&ペーストしてお使いください
             </div>
           </div>
         </form>
