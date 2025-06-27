@@ -298,9 +298,18 @@ https://ai-launch.vercel.app
             </nav>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">
-              こんにちは、{user}さん
-            </span>
+            <div className="flex items-center gap-2">
+              {user?.picture && (
+                <img 
+                  src={user.picture} 
+                  alt={user.name} 
+                  className="w-8 h-8 rounded-full"
+                />
+              )}
+              <span className="text-sm text-gray-600">
+                こんにちは、{user?.name || user}さん
+              </span>
+            </div>
             <button
               onClick={logout}
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
