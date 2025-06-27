@@ -807,8 +807,8 @@ https://ai-launch.vercel.app
 
       {/* ローンチライブラリーモーダル */}
       {showLibrary && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-start justify-center z-50 p-2">
-          <div className="bg-white rounded-lg w-full max-w-[98vw] h-[98vh] overflow-hidden mt-2">
+        <div className="fixed inset-0 bg-black bg-opacity-20 flex items-start justify-center z-50 p-1">
+          <div className="bg-white rounded-lg w-full max-w-[99vw] h-[99vh] overflow-hidden mt-1">
             {/* モーダルヘッダー */}
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 sm:p-6">
               <div className="flex justify-between items-center">
@@ -872,7 +872,7 @@ https://ai-launch.vercel.app
             </div>
 
             {/* コンテンツエリア */}
-            <div className="px-6 py-6 overflow-y-auto" style={{height: 'calc(98vh - 160px)'}}>
+            <div className="px-6 py-6 overflow-y-auto" style={{height: 'calc(99vh - 160px)'}}>
               {activeLibraryTab === 'course' && <PLFCourseContent />}
               {activeLibraryTab === 'cases' && <SuccessCasesContent />}
               {activeLibraryTab === 'practices' && <BestPracticesContent />}
@@ -1754,6 +1754,14 @@ function TutorialsContent() {
       description: '成功するローンチのタイムライン設計方法を実例で学習',
       thumbnail: '📅',
       steps: ['Pre-Launch期間の設定', 'メール配信スケジュール', 'Launch期間の最適化', 'Post-Launchフォローアップ', 'KPI設定と効果測定']
+    },
+    {
+      title: 'PLF式ローンチの実践マスタークラス',
+      duration: '25分',
+      description: '実際のローンチ成功事例を交えながら、PLF手法の実践ポイントを詳しく解説',
+      thumbnail: '🚀',
+      url: 'https://vimeo.com/774789822/0fb1277c78',
+      steps: ['PLF3ステップの深掘り解説', '実際の成功ローンチ分析', 'メール配信タイミングの最適化', '見込み客の心理フロー設計', 'コンバージョン率向上のコツ']
     }
   ];
 
@@ -1784,9 +1792,20 @@ function TutorialsContent() {
                   ))}
                 </ul>
               </div>
-              <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
-                🎬 動画を見る
-              </button>
+              {tutorial.url ? (
+                <a 
+                  href={tutorial.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium inline-block text-center"
+                >
+                  🎬 動画を見る
+                </a>
+              ) : (
+                <button className="w-full bg-gray-400 text-white py-2 px-4 rounded-md cursor-not-allowed font-medium">
+                  🎬 準備中
+                </button>
+              )}
             </div>
           </div>
         ))}
