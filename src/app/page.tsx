@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import LoginPage from "@/components/LoginPage";
 import JSZip from "jszip";
 
 interface FormData {
@@ -11,7 +9,6 @@ interface FormData {
 }
 
 export default function Home() {
-  const { isAuthenticated, logout, user } = useAuth();
   
   const [formData, setFormData] = useState<FormData>({
     productName: "",
@@ -267,10 +264,6 @@ https://ai-launch.vercel.app
     }
   };
 
-  // 認証されていない場合はログインページを表示
-  if (!isAuthenticated) {
-    return <LoginPage />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -296,26 +289,6 @@ https://ai-launch.vercel.app
                 📚 ライブラリー
               </button>
             </nav>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              {user?.picture && (
-                <img 
-                  src={user.picture} 
-                  alt={user.name} 
-                  className="w-8 h-8 rounded-full"
-                />
-              )}
-              <span className="text-sm text-gray-600">
-                こんにちは、{user?.name || user}さん
-              </span>
-            </div>
-            <button
-              onClick={logout}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
-            >
-              ログアウト
-            </button>
           </div>
         </div>
       </header>
