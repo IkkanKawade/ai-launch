@@ -350,7 +350,7 @@ https://ai-launch.vercel.app
               </div>
 
               {/* PLF式ローンチ基本知識 */}
-              <div className="bg-blue-50 rounded-lg p-4 mt-6">
+              <div className="bg-blue-50 rounded-lg p-4 mt-6 hidden">
                 <div 
                   className="cursor-pointer flex justify-between items-center"
                   onClick={() => setShowStrategyDropdown(!showStrategyDropdown)}
@@ -1436,6 +1436,26 @@ function PLFCourseContent() {
   const [expandedLesson, setExpandedLesson] = useState<string | null>(null);
 
   const lessons = [
+    {
+      id: 'basic',
+      title: 'PLF式ローンチの基本知識',
+      duration: '15分',
+      level: '入門',
+      description: 'PLFとは何か、基本構造、成功ポイントを簡潔に学びます',
+      content: `
+【学習内容】
+1. PLF（Product Launch Formula）とは？
+2. PLFの基本構造（Pre-Launch／Launch／Post-Launch）
+3. 6通のメールシーケンスの役割
+4. PLF成功の4つのポイント
+   - 価値先行
+   - ストーリーテリング
+   - 社会的証明
+   - 希少性・緊急性
+5. よくある失敗パターンと回避策
+`,
+    },
+    
     {
       id: 'foundation',
       title: 'PLFの基礎理論',
