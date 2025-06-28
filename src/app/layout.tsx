@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AlphaBanner from "@/components/AlphaBanner";
 import { AuthProvider } from "@/context/AuthContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -15,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AIローンチくん",
+  title: "AIローンチくん α版",
   description: "PLF式ローンチシーケンス自動生成ツール",
 };
 
@@ -31,6 +32,7 @@ export default function RootLayout({
       >
         <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
           <AuthProvider>
+              <AlphaBanner />
             {children}
           </AuthProvider>
         </GoogleOAuthProvider>

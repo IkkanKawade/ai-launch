@@ -48,7 +48,7 @@ export default function LoginPage() {
             🚀
           </div>
           <h2 className="mt-6 text-center text-3xl font-bold bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
-            AIローンチくん
+            AIローンチくん α版
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Googleアカウントでログインしてください
