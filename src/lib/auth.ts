@@ -15,13 +15,13 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account?.provider === "google") {
-        (token as any).picture = (profile as any)?.picture;
+        (token as { picture?: string }).picture = (profile as { picture?: string })?.picture;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user!.image = (token as any).picture as string;
+        session.user!.image = (token as { picture?: string }).picture as string;
       }
       return session;
     },
