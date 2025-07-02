@@ -286,7 +286,7 @@ https://ai-launch.vercel.app
                 onClick={() => setShowLibrary(true)}
                 className="text-gray-600 hover:text-gray-900 px-2 md:px-3 py-2 rounded-md text-xs md:text-sm font-medium hover:bg-gray-50"
               >
-                📚 ライブラリー
+                📚 PLF式ローンチの学習ロードマップ
               </button>
             </nav>
           </div>
@@ -788,7 +788,7 @@ https://ai-launch.vercel.app
         </div>
       </div>
 
-      {/* ローンチライブラリーモーダル */}
+      {/* PLF式ローンチの学習ロードマップモーダル */}
       {showLibrary && (
         <div className="fixed inset-0 bg-black bg-opacity-20 flex items-start justify-center z-50 p-1">
           <div className="bg-white rounded-lg w-full max-w-[99vw] h-[99vh] overflow-hidden mt-1">
@@ -796,7 +796,7 @@ https://ai-launch.vercel.app
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 sm:p-6">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-2xl font-bold">📚 ローンチライブラリー</h2>
+                  <h2 className="text-2xl font-bold">📚 PLF式ローンチの学習ロードマップ</h2>
                   <p className="mt-1 opacity-90">PLF式ローンチの学習リソースと成功事例集</p>
                 </div>
                 <button
@@ -1432,7 +1432,7 @@ function generateScript(formData: FormData): string {
 送信者情報：${formData.productName}代表`;
 }
 
-// ライブラリーコンポーネント関数群
+// PLF式ローンチの学習ロードマップコンポーネント関数群
 function PLFCourseContent() {
   const [expandedLesson, setExpandedLesson] = useState<string | null>(null);
 
