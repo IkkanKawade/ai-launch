@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import JSZip from "jszip";
 
 interface FormData {
@@ -47,7 +46,6 @@ export default function Home() {
   const [showStrategyDropdown, setShowStrategyDropdown] = useState(false);
   const [showLibrary, setShowLibrary] = useState(false);
   const [activeLibraryTab, setActiveLibraryTab] = useState('course');
-  const { data: session } = useSession();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -292,19 +290,7 @@ https://ai-launch.vercel.app
               </button>
             </nav>
           </div>
-          {/* 右側：ログインエリア */}
-          <div>
-            {session ? (
-              <div className="flex items-center gap-3">
-                {session.user?.image && (
-                  <img src={session.user.image as string} alt="avatar" className="w-8 h-8 rounded-full" />
-                )}
-                <button onClick={() => signOut()} className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-xs md:text-sm font-medium hover:bg-gray-50">ログアウト</button>
-              </div>
-            ) : (
-              <button onClick={() => signIn('google')} className="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-xs md:text-sm font-medium">Googleでログイン</button>
-            )}
-          </div>
+          {/* 右側：ログインエリア - AlphaBannerで処理されるため削除 */}
         </div>
       </header>
 
